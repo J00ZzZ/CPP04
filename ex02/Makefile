@@ -1,30 +1,28 @@
+CC = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = ex02
+SRCS_DIR = ./srcs
+SRCS = $(wildcard $(SRCS_DIR)/*.cpp)
+OBJS_DIR = ./objs
+OBJS = $(SRCS:.cpp=.o)
+RM = rm -rf
 
-SRC_DIR = ./srcs
-OBJ_DIR = obj
-SRCS = $(SRC_DIR)/main.cpp $(SRC_DIR)/animal.cpp $(SRC_DIR)/brain.cpp $(SRC_DIR)/dog.cpp $(SRC_DIR)/cat.cpp
-OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
+all: $(NAME)
 
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+%.o: %.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
-all: $(OBJ_DIR) $(NAME)
-
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
 
 .PHONY: all clean fclean re
