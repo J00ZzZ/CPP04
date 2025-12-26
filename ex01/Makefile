@@ -1,7 +1,7 @@
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = Polymorphism
+NAME = ex01
 SRCS_DIR = ./srcs
 SRCS = $(wildcard $(SRCS_DIR)/*.cpp)
 OBJS_DIR = ./objs
